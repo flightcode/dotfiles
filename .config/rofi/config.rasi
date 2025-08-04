@@ -14,4 +14,4 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "glass"
+@theme "dynamic"

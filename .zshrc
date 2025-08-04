@@ -13,4 +13,4 @@ sh ~/.cache/hellwal/terminal.sh
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias ls='ls -lah --color=auto'
 alias grep='grep --color=auto'
-alias wal='hellwal -s ~/.cache/hellwal/swww.sh'
+alias wal='~/.scripts/wallset.sh'
