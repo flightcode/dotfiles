@@ -12,3 +12,4 @@ export GPG_TTY=$(tty)
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias ls='ls -lah --color=auto'
 alias grep='grep --color=auto'
+alias wal='swww img --transition-type outer --transition-pos 0.854,0.977'
