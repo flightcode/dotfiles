@@ -1,11 +1,35 @@
-add_newline = false
+# PowerLine Format
+format = """
+[](cyan)\
+$username\
+[](bg:purple fg:cyan)\
+$directory\
+[](fg:purple bg:yellow)\
+$git_branch\
+[](fg:yellow bg:red)\
+$cmd_duration\
+[ ](fg:red)\
+"""
 
-[line_break]
-disabled = true
-
-[character]
-success_symbol = ">(bold green)"
-error_symbol = ">(bold red)"
+[username]
+show_always = true
+style_user = "fg:black bg:cyan"
+style_root = "fg:black bg:cyan"
+format = '[$user ]($style)'
 
 [directory]
-truncation_symbol = ".../"
+style = "fg:black bg:purple"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "fg:black bg:yellow"
+format = '[ $symbol $branch ]($style)'
+
+[cmd_duration]
+min_time = 500
+disabled = false
+style = "fg:black bg:red"
+format = '[ took $duration ]($style)'
