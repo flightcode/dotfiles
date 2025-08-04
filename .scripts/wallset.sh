@@ -18,5 +18,5 @@ if [ ! -z "$1" ]; then
 
   # Firefox
   cp ~/.cache/hellwal/pywalfox.json ~/.cache/wal/colors.json
-  pywalfox update
+  pywalfox --browser librewolf update
 fi
