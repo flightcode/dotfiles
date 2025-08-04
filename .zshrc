@@ -6,8 +6,9 @@ SAVEHIST=1000
 eval "$(starship init zsh)"
 export GPG_TTY=$(tty)
 
-#(cat ~/.cache/wal/sequences &)
-#source ~/.cache/wal/colors-tty.sh
+# Wal Colours
+source ~/.cache/hellwal/variables.sh
+sh ~/.cache/hellwal/terminal.sh
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias ls='ls -lah --color=auto'
