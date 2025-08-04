@@ -10,4 +10,5 @@ export GPG_TTY=$(tty)
 #source ~/.cache/wal/colors-tty.sh
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias ls='ls -lah'
+alias ls='ls -lah --color=auto'
+alias grep='grep --color=auto'
