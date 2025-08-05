@@ -17,6 +17,7 @@ Finally I return to Arch after 3 years of burnout. New repo since it's easier th
 - Starship (Shell Prompt)
 - lf (File Manager)
 - rofi (Menu)
+- eww (Widgets & Bar)
 - neofetch (Fetch)
 - btop (System Monitor)
 - librewolf (Web Browser)
