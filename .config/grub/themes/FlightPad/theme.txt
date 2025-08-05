@@ -1,0 +1,73 @@
+title-text: ""
+
+# Desktop
+desktop-image: "background.png"
+desktop-image-scale-method: "crop"
+desktop-image-h-align: "center"
+desktop-color: "#000000"
+
+# Terminal
+terminal-font: "Terminus Regular 14"
+terminal-box: "terminal_box_*.png"
+terminal-left: "0"
+terminal-top: "0"
+terminal-width: "100%"
+terminal-height: "100%"
+terminal-border: "0"
+
+# Boot menu
++ boot_menu {
+  left = 7%+3
+  top = 86%-161
+  width = 600
+  height = 143
+
+  ## Items
+  item_font = "Funnel Sans Regular 21"
+  item_color = "#ACA8A5"
+  selected_item_color = "#ffffff"
+  item_height = 32
+  item_padding = 0
+  item_spacing = 4
+  item_align = left
+  selected_item_pixmap_style = "selected_item_*.png"
+
+  ## Icons
+  icon_width = 19
+  icon_height = 0
+  item_icon_space = 18
+}
+
+# Commands label
++ label {
+  color = "#ACA8A5"
+  font = "Funnel Sans Regular 21"
+  left = 9%+3
+  top = 87%+1
+  width = 31%
+  align = "left"
+  text = "Press C for Console or E to Edit"
+}
+
+# Booting label
++ label {
+  color = "#ACA8A5"
+  font = "Funnel Sans Regular 22"
+  left = 85%+1
+  top = 87%+5
+  width = 31%
+  align = "left"
+  text = "Booting"
+}
+
+# Timeout label
++ label {
+  color = "#5AEB71"
+  font = "Teko Regular 32"
+  left = 85%+112
+  top = 87%
+  width = 31%
+  align = "left"
+  id = "__timeout__"
+  text = "%d"
+}
