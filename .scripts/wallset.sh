@@ -13,6 +13,9 @@ if [ ! -z "$1" ]; then
   # Wallpaper
   swww img "$wallpaper" -t wipe --transition-angle 30 --transition-step 90 --transition-duration 0.4 --transition-fps 60
 
+  # Kitty
+  cp ~/.cache/hellwal/kitty.conf ~/.config/kitty/colors.conf
+
   # Rofi
   cp ~/.cache/hellwal/rofi.rasi ~/.config/rofi/dynamic.rasi
 
