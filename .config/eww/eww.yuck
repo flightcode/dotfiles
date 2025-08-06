@@ -1,24 +1,36 @@
 ;; Variables
-(defpoll battery_cap :interval "1s" "./scripts/battery --bat")
-(defpoll battery0_cap :interval "1s" "./scripts/battery --bat BAT0")
-(defpoll battery1_cap :interval "1s" "./scripts/battery --bat BAT1")
+(defpoll battery_cap :interval "15s" "./scripts/battery --bat")
+(defpoll battery0_cap :interval "15s" "./scripts/battery --bat BAT0")
+(defpoll battery1_cap :interval "15s" "./scripts/battery --bat BAT1")
 
-(defpoll battery_health :interval "1s" "./scripts/battery --bat-health")
-(defpoll battery0_health :interval "1s" "./scripts/battery --bat-health BAT0")
-(defpoll battery1_health :interval "1s" "./scripts/battery --bat-health BAT1")
+(defpoll battery_health :interval "1m" "./scripts/battery --bat-health")
+(defpoll battery0_health :interval "1m" "./scripts/battery --bat-health BAT0")
+(defpoll battery1_health :interval "1m" "./scripts/battery --bat-health BAT1")
 
-(defpoll battery_status :interval "1s" "./scripts/battery --bat-st BAT0")
+(defpoll battery_status :interval "1m" "./scripts/battery --bat-st BAT0")
 
 (defwidget battery []
- 	(box
-	  "Batt ${battery_cap}% (Cell 1 ${battery0_cap}%) (Cell 2 ${battery1_cap}%) ${battery_status}"
-	  (circular-progress :value battery_cap :thickness 2
-	  	(label :text "󰂄"
-                :class "sys_icon_bat"
+ 	(box :hexpand "false" :vexpand "false" :class "sys_bat"
+	  "${battery_status}"
+	  (circular-progress :value battery_cap :thickness 2 :class "sys_ring sys_bat"
+	  	(label :text ""
+                :class "sys_bat"
                 :limit-width 2
                 :wrap false)
 	  )
-	)	
+	  (circular-progress :value battery0_cap :thickness 2 :class "sys_ring sys_bat"
+                (label :text "0"
+                :class "sys_bat"
+                :limit-width 2
+                :wrap false)
+          )
+	  (circular-progress :value battery1_cap :thickness 2 :class "sys_ring sys_bat"
+                (label :text "1"
+                :class "sys_bat"
+                :limit-width 2
+                :wrap false)
+          )
+	)
 )
 
 (defwindow bar
