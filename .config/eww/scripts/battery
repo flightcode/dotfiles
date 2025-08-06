@@ -74,6 +74,32 @@ get_health() {
         fi
 }
 
+get_total_health() {
+    local total_full=0
+    local total_design=0
+
+    for battery in /sys/class/power_supply/BAT*; do
+        [[ -d "$battery" ]] || continue
+
+        if [[ -f "$battery/energy_full" && -f "$battery/energy_full_design" ]]; then
+            full=$(<"$battery/energy_full")
+            design=$(<"$battery/energy_full_design")
+        else
+            continue
+        fi
+
+        total_full=$((total_full + full))
+        total_design=$((total_design + design))
+    done
+
+    if (( total_design > 0 )); then
+        awk -v full="$total_full" -v design="$total_design" 'BEGIN { printf "%.0f\n", (full / design) * 100 }'
+    else
+        echo "No battery info found."
+        return 1
+    fi
+}
+
 if [[ "$1" == "--bat" ]]; then
 	if [[ -n "$2" ]]; then
 		get_cap "$2"
