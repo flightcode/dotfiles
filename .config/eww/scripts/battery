@@ -9,8 +9,6 @@ get_cap() {
 			cat "$path/capacity"
 		elif [[ -f "$path/energy_now" && -f "$path/energy_full" ]]; then
 			awk -v now=$(<"$path/energy_now") -v full=$(<"$path/energy_full") 'BEGIN { printf "%.0f\n", (now / full) * 100 }'
-		elif [[ -f "$path/charge_now" && -f "$path/charge_full" ]]; then
-			awk -v now=$(<"$path/charge_now") -v full=$(<"$path/charge_full") 'BEGIN { printf "%.0f\n", (now / full) * 100 }'
 		else
 			echo "Cannot determine capacity for $battery"
 			return 1
@@ -31,9 +29,6 @@ get_total_cap() {
         if [[ -f "$battery/energy_now" && -f "$battery/energy_full" ]]; then
             now=$(<"$battery/energy_now")
             full=$(<"$battery/energy_full")
-        elif [[ -f "$battery/charge_now" && -f "$battery/charge_full" ]]; then
-            now=$(<"$battery/charge_now")
-            full=$(<"$battery/charge_full")
         elif [[ -f "$battery/capacity" ]]; then
             # Fall back to simple average
             capacity=$(<"$battery/capacity")
@@ -67,7 +62,12 @@ get_health() {
         local path="/sys/class/power_supply/$battery"
 
         if [[ -d "$path" ]]; then
-		echo "health"
+		if [[ -f "$path/energy_full" && -f "$path/energy_full_design" ]]; then
+			awk -v full=$(<"$path/energy_full") -v design=$(<"$path/energy_full_design") 'BEGIN { printf "%.0f\n", (full / design) * 100 }'
+		else
+			echo "Cannot determine capacity for $battery"
+			return 1
+		fi
         else
                 echo "Battery $battery not found."
                 return 1
