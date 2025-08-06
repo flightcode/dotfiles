@@ -1,6 +1,6 @@
 ;; Variables
 (defpoll battery :interval "1s" "./scripts/battery --bat")
-(defpoll battery_status :interval "1s" "./scripts/battery --bat-st")
+(defpoll battery_status :interval "1s" "./scripts/battery --bat-st BAT0")
 
 (defwidget battery []
 	(box

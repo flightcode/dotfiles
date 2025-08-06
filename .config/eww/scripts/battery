@@ -1,16 +1,95 @@
 #!/bin/bash
 
-battery() {
-	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
-	cat /sys/class/power_supply/${BAT}/capacity
+get_cap() {
+	local battery=$1
+	local path="/sys/class/power_supply/$battery"
+
+	if [[ -d "$path" ]]; then
+		if [[ -f "$path/capacity" ]]; then
+			cat "$path/capacity"
+		elif [[ -f "$path/energy_now" && -f "$path/energy_full" ]]; then
+			awk -v now=$(<"$path/energy_now") -v full=$(<"$path/energy_full") 'BEGIN { printf "%.0f\n", (now / full) * 100 }'
+		elif [[ -f "$path/charge_now" && -f "$path/charge_full" ]]; then
+			awk -v now=$(<"$path/charge_now") -v full=$(<"$path/charge_full") 'BEGIN { printf "%.0f\n", (now / full) * 100 }'
+		else
+			echo "Cannot determine capacity for $battery"
+			return 1
+		fi
+	else
+		echo "Battery $battery not found."
+		return 1
+	fi
 }
-battery_stat() {
-	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
-	cat /sys/class/power_supply/${BAT}/status
+
+get_total_cap() {
+    local total_now=0
+    local total_full=0
+
+    for battery in /sys/class/power_supply/BAT*; do
+        [[ -d "$battery" ]] || continue
+
+        if [[ -f "$battery/energy_now" && -f "$battery/energy_full" ]]; then
+            now=$(<"$battery/energy_now")
+            full=$(<"$battery/energy_full")
+        elif [[ -f "$battery/charge_now" && -f "$battery/charge_full" ]]; then
+            now=$(<"$battery/charge_now")
+            full=$(<"$battery/charge_full")
+        elif [[ -f "$battery/capacity" ]]; then
+            # Fall back to simple average
+            capacity=$(<"$battery/capacity")
+            total_now=$((total_now + capacity))
+            total_full=$((total_full + 100))
+            continue
+        else
+            continue
+        fi
+
+        total_now=$((total_now + now))
+        total_full=$((total_full + full))
+    done
+
+    if (( total_full > 0 )); then
+        awk -v now="$total_now" -v full="$total_full" 'BEGIN { printf "%.0f\n", (now / full) * 100 }'
+    else
+        echo "No battery info found."
+        return 1
+    fi
+}
+
+get_stat() {
+	local battery=$1
+	local path="/sys/class/power_supply/$battery"
+	cat "$path/status"
+}
+
+get_health() {
+        local battery=$1
+        local path="/sys/class/power_supply/$battery"
+
+        if [[ -d "$path" ]]; then
+		echo "health"
+        else
+                echo "Battery $battery not found."
+                return 1
+        fi
 }
 
 if [[ "$1" == "--bat" ]]; then
-	battery
+	if [[ -n "$2" ]]; then
+		get_cap "$2"
+	else
+		get_total_cap
+	fi
 elif [[ "$1" == "--bat-st" ]]; then
-	battery_stat
+	if [[ -n "$2" ]]; then
+                get_stat "$2"
+        else
+                echo "No battery provided."
+        fi
+elif [[ "$1" == "--bat-health" ]]; then
+	if [[ -n "$2" ]]; then
+		get_health "$2"
+	else
+		get_total_health
+	fi
 fi
