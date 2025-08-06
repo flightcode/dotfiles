@@ -1,15 +1,21 @@
 ;; Variables
-(defpoll battery :interval "1s" "./scripts/battery --bat")
+(defpoll battery_cap :interval "1s" "./scripts/battery --bat")
+(defpoll battery0_cap :interval "1s" "./scripts/battery --bat BAT0")
+(defpoll battery1_cap :interval "1s" "./scripts/battery --bat BAT1")
+
+(defpoll battery_health :interval "1s" "./scripts/battery --bat-health")
+(defpoll battery0_health :interval "1s" "./scripts/battery --bat-health BAT0")
+(defpoll battery1_health :interval "1s" "./scripts/battery --bat-health BAT1")
+
 (defpoll battery_status :interval "1s" "./scripts/battery --bat-st BAT0")
 
 (defwidget battery []
-	(box
-	  "Batt ${battery}% ${battery_status}"
-	  (circular-progress :value battery :thickness 2
+ 	(box
+	  "Batt ${battery_cap}% (Cell 1 ${battery0_cap}%) (Cell 2 ${battery1_cap}%) ${battery_status}"
+	  (circular-progress :value battery_cap :thickness 2
 	  	(label :text "󰂄"
                 :class "sys_icon_bat"
                 :limit-width 2
-                :show_truncated false
                 :wrap false)
 	  )
 	)	
@@ -24,4 +30,5 @@
                                :anchor "top center")
            :stacking "fg"
            :exclusive "true"
-		(battery))
+		(battery)
+)
