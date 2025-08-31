@@ -16,8 +16,8 @@ if [ ! -z "$1" ]; then
   # Kitty
   cp ~/.cache/hellwal/kitty.conf ~/.config/kitty/colors.conf
 
-  # Rofi
-  cp ~/.cache/hellwal/rofi.rasi ~/.config/rofi/dynamic.rasi
+  # Vicinae
+  ## PLACEHOLDER
 
   # Firefox
   cp ~/.cache/hellwal/pywalfox.json ~/.cache/wal/colors.json
