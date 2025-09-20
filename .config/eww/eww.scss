@@ -1,12 +1,19 @@
 * {
 	all: unset;
-	font-family: "SauceCodePro Nerd Font Mono";
-}
-
-.sys_bat {
+	font-family: "SauceSans3 Nerd Font";
 	color: #afbea2;
 }
 
-.sys_ring {
-	border-radius: 10px;
+.bar {
+	padding: 5px;
+	background: rgba(0,0,0,0.5);
+}
+
+.bar_element {
+	padding: 0 5px 0 5px;
+}
+
+.sys_bat {
+	font-size: 13px;
+	margin: 7px;
 }

@@ -1,4 +1,43 @@
-;; Variables
+(defwidget desktop []
+	(box :class "bar_element"
+		"Desktops"
+	)
+)
+
+;; Time
+
+(defpoll time :interval "1s" :initial "initial-value" "date +%H:%M:%S")
+
+(defwidget time []
+	(box :class "bar_element"
+		"${time}"
+	)
+)
+
+;; Network
+
+(defpoll wifi :interval "5s" "./scripts/wifi")
+
+(defwidget network []
+	(box :class "bar_element"
+		(label :text "${wifi == 0 ? 'Disconnected' : wifi}")
+	)
+)
+
+(defwidget bluetooth []
+	(box :class "bar_element"
+		"Bluetooth"
+	)
+)
+
+(defwidget audio []
+	(box :class "bar_element"
+		"Audio"
+	)
+)
+
+;; BATTERY
+
 (defpoll battery_cap :interval "15s" "./scripts/battery --bat")
 (defpoll battery0_cap :interval "15s" "./scripts/battery --bat BAT0")
 (defpoll battery1_cap :interval "15s" "./scripts/battery --bat BAT1")
@@ -10,37 +49,41 @@
 (defpoll battery_status :interval "1m" "./scripts/battery --bat-st BAT0")
 
 (defwidget battery []
- 	(box :hexpand "false" :vexpand "false" :class "sys_bat"
-	  "${battery_status}"
-	  (circular-progress :value battery_cap :thickness 2 :class "sys_ring sys_bat"
-	  	(label :text ""
-                :class "sys_bat"
-                :limit-width 2
-                :wrap false)
-	  )
-	  (circular-progress :value battery0_cap :thickness 2 :class "sys_ring sys_bat"
-                (label :text "0"
-                :class "sys_bat"
-                :limit-width 2
-                :wrap false)
-          )
-	  (circular-progress :value battery1_cap :thickness 2 :class "sys_ring sys_bat"
-                (label :text "1"
-                :class "sys_bat"
-                :limit-width 2
-                :wrap false)
-          )
+ 	(box :class "bar_element" :space-evenly false :spacing 5
+		(label :text "${battery_status}")
+		(box :space-evenly true :spacing 5 
+			(circular-progress :value battery_cap :thickness 2 :class "sys_ring"
+				(label :text "" :yalign 0.4 :class "sys_bat")
+			)
+			(circular-progress :value battery0_cap :thickness 2 :class "sys_ring"
+        			(label :text "0" :class "sys_bat")
+			)
+			(circular-progress :value battery1_cap :thickness 2 :class "sys_ring"
+       	         		(label :text "1" :class "sys_bat")
+			)
+		)
 	)
 )
 
+;; BAR
+
 (defwindow bar
-           :monitor 0
-           :geometry (geometry :x "0%"
-                               :y "10px"
-                               :width "99%"
-                               :height "30px"
-                               :anchor "top center")
-           :stacking "fg"
-           :exclusive "true"
-		(battery)
+	:monitor 0
+	:geometry (geometry :x "0" :y "0" :width "100%" :height "15px" :anchor "top center")
+	:stacking "bg"
+	:exclusive true
+	(box :orientation "h" :space-evenly true :class "bar"
+		(box :halign "start" :space-evenly false :spacing 10
+			(desktop)
+		)
+		(box :halign "center" :space-evenly false :spacing 10
+			(time)
+		)
+		(box :halign "end" :space-evenly false :spacing 10
+			(network)
+			(bluetooth)
+			(audio)
+	   		(battery)
+		)
+	)
 )
