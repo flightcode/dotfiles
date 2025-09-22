@@ -21,6 +21,7 @@ if [ ! -z "$1" ]; then
 
   # Swaylock
   cp "$1" ~/.config/swaylock/bg
+  cp ~/.cache/hellwal/swaylock.conf ~/.config/swaylock/swaylock.conf
 
   # Vicinae
   ## PLACEHOLDER
