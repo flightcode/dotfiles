@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-swaylock
+swaylock -C ~/.config/swaylock/swaylock.conf

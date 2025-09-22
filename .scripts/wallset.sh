@@ -16,6 +16,12 @@ if [ ! -z "$1" ]; then
   # Kitty
   cp ~/.cache/hellwal/kitty.conf ~/.config/kitty/colors.conf
 
+  # eww
+  ## PLACEHOLDER
+
+  # Swaylock
+  cp "$1" ~/.config/swaylock/bg
+
   # Vicinae
   ## PLACEHOLDER
 
