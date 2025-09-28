@@ -1,0 +1,23 @@
+#!/bin/bash
+
+workspaces=$(hyprctl workspaces | grep -oP 'workspace ID [0-9]+' | grep -oP '[0-9]+')
+max_workspace=$(echo $workspaces | tr ' ' '\n' | sort -r | head -1)
+
+content="(box :class \"bar_element\" :space-evenly true :spacing 5 "
+
+if [[ -z "$max_workspace" ]]; then
+	echo ""
+	exit
+else
+	for i in $(seq 1 $max_workspace); do
+		if echo "$workspaces" | grep -qw "$i"; then
+			content+="(label :text \"\")"
+		else
+			content+="(label :text \"\")"
+		fi
+	done
+fi
+
+content+=")"
+
+echo "$content"

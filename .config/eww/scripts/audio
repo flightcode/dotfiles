@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ $(pamixer --get-mute) == "true" ]]; then
+	echo "0"
+else
+	echo "$(pamixer --get-volume)"
+fi

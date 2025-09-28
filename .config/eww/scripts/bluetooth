@@ -1,0 +1,9 @@
+#!/bin/bash
+
+bluetooth_count=$(bluetoothctl devices Connected | grep 'Device' | wc -l)
+
+if [[ -z "$bluetooth_count" ]]; then
+	echo "0"
+else
+	echo "$bluetooth_count"
+fi
