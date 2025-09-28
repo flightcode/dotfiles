@@ -20,47 +20,46 @@
 
 (defwidget network []
 	(box :class "bar_element"
-		(label :text "${wifi == 0 ? 'Disconnected' : wifi}")
+		(label :text "󰖩 ${wifi == 0 ? 'Disconnected' : wifi}")
 	)
 )
 
 (defwidget bluetooth []
 	(box :class "bar_element"
-		"Bluetooth"
+		"󰂯 Bluetooth"
 	)
 )
 
+(defpoll audio :interval "1s" "./scripts/audio")
+
 (defwidget audio []
-	(box :class "bar_element"
-		"Audio"
+	(box :class "bar_element" :space-evenly false :spacing 5
+		(label :text "${audio == 0 ? '󰖁 ': '󰕾 '}")
 	)
 )
 
 ;; BATTERY
 
-(defpoll battery_cap :interval "15s" "./scripts/battery --bat")
-(defpoll battery0_cap :interval "15s" "./scripts/battery --bat BAT0")
-(defpoll battery1_cap :interval "15s" "./scripts/battery --bat BAT1")
+(defpoll battery_cap :interval "1m" "./scripts/battery --bat")
+(defpoll battery0_cap :interval "1m" "./scripts/battery --bat BAT0")
+(defpoll battery1_cap :interval "1m" "./scripts/battery --bat BAT1")
 
-(defpoll battery_health :interval "1m" "./scripts/battery --bat-health")
-(defpoll battery0_health :interval "1m" "./scripts/battery --bat-health BAT0")
-(defpoll battery1_health :interval "1m" "./scripts/battery --bat-health BAT1")
+;; (defpoll battery_health :interval "1m" "./scripts/battery --bat-health")
+;; (defpoll battery0_health :interval "1m" "./scripts/battery --bat-health BAT0")
+;; (defpoll battery1_health :interval "1m" "./scripts/battery --bat-health BAT1")
 
-(defpoll battery_status :interval "1m" "./scripts/battery --bat-st BAT0")
+(defpoll battery_status :interval "15s" "./scripts/battery --bat-st BAT0")
 
 (defwidget battery []
  	(box :class "bar_element" :space-evenly false :spacing 5
-		(label :text "${battery_status}")
-		(box :space-evenly true :spacing 5 
-			(circular-progress :value battery_cap :thickness 2 :class "sys_ring"
-				(label :text "" :yalign 0.4 :class "sys_bat")
-			)
-			(circular-progress :value battery0_cap :thickness 2 :class "sys_ring"
-        			(label :text "0" :class "sys_bat")
-			)
-			(circular-progress :value battery1_cap :thickness 2 :class "sys_ring"
-       	         		(label :text "1" :class "sys_bat")
-			)
+		(circular-progress :value battery_cap :thickness 2 :class "sys_ring"
+			(label :text "${battery_status == 'Charging' ? '󰂄' : '󰁹'}" :class "sys_ring_inner")
+		)
+		(circular-progress :value battery0_cap :thickness 2 :class "sys_ring"
+        		(label :text "0" :class "sys_ring_inner")
+		)
+		(circular-progress :value battery1_cap :thickness 2 :class "sys_ring"
+       	       		(label :text "1" :class "sys_ring_inner")
 		)
 	)
 )
