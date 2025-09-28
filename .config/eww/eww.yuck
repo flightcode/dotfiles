@@ -20,13 +20,15 @@
 
 (defwidget network []
 	(box :class "bar_element"
-		(label :text "󰖩 ${wifi == 0 ? 'Disconnected' : wifi}")
+		(label :text "${wifi == 0 ? '󰖪 ' : '󰖩 ${wifi}'}")
 	)
 )
 
+(defpoll bluetooth :interval "5s" "./scripts/bluetooth")
+
 (defwidget bluetooth []
 	(box :class "bar_element"
-		"󰂯 Bluetooth"
+		(label :text "${bluetooth == 0 ? '󰂲 ' : '󰂯 ${bluetooth}'}")
 	)
 )
 
