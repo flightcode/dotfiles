@@ -1,7 +1,8 @@
-(defwidget desktop []
-	(box :class "bar_element"
-		"Desktops"
-	)
+;; Workspaces
+(defpoll workspace :interval "1s" "./scripts/workspaces")
+
+(defwidget workspaces []
+	(literal :content workspace)
 )
 
 ;; Time
@@ -75,7 +76,7 @@
 	:exclusive true
 	(box :orientation "h" :space-evenly true :class "bar"
 		(box :halign "start" :space-evenly false :spacing 10
-			(desktop)
+			(workspaces)
 		)
 		(box :halign "center" :space-evenly false :spacing 10
 			(time)
