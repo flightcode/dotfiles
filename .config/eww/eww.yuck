@@ -1,5 +1,5 @@
 ;; Workspaces
-(defpoll workspace :interval "1s" "./scripts/workspaces")
+(defpoll workspace :interval "300ms" "./scripts/workspaces")
 
 (defwidget workspaces []
 	(literal :content workspace)
@@ -17,7 +17,7 @@
 
 ;; Network
 
-(defpoll wifi :interval "5s" "./scripts/wifi")
+(defpoll wifi :interval "10s" "./scripts/wifi")
 
 (defwidget network []
 	(box :class "bar_element"
@@ -25,7 +25,7 @@
 	)
 )
 
-(defpoll bluetooth :interval "5s" "./scripts/bluetooth")
+(defpoll bluetooth :interval "10s" "./scripts/bluetooth")
 
 (defwidget bluetooth []
 	(box :class "bar_element"
@@ -33,7 +33,7 @@
 	)
 )
 
-(defpoll audio :interval "1s" "./scripts/audio")
+(defpoll audio :interval "5s" "./scripts/audio")
 
 (defwidget audio []
 	(box :class "bar_element" :space-evenly false :spacing 5
@@ -43,15 +43,15 @@
 
 ;; BATTERY
 
-(defpoll battery_cap :interval "1m" "./scripts/battery --bat")
-(defpoll battery0_cap :interval "1m" "./scripts/battery --bat BAT0")
-(defpoll battery1_cap :interval "1m" "./scripts/battery --bat BAT1")
+(defpoll battery_cap :interval "3m" "./scripts/battery --bat")
+(defpoll battery0_cap :interval "3m" "./scripts/battery --bat BAT0")
+(defpoll battery1_cap :interval "3m" "./scripts/battery --bat BAT1")
 
 ;; (defpoll battery_health :interval "1m" "./scripts/battery --bat-health")
 ;; (defpoll battery0_health :interval "1m" "./scripts/battery --bat-health BAT0")
 ;; (defpoll battery1_health :interval "1m" "./scripts/battery --bat-health BAT1")
 
-(defpoll battery_status :interval "15s" "./scripts/battery --bat-st BAT0")
+(defpoll battery_status :interval "30s" "./scripts/battery --bat-st BAT0")
 
 (defwidget battery []
  	(box :class "bar_element" :space-evenly false :spacing 5
