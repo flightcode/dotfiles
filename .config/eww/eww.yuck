@@ -7,7 +7,7 @@
 
 ;; Time
 
-(defpoll time :interval "1s" :initial "initial-value" "date +%H:%M:%S")
+(defpoll time :interval "15s" :initial "initial-value" "date +%H:%M") ;; :%S
 
 (defwidget time []
 	(box :class "bar_element"
