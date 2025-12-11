@@ -1,0 +1,2 @@
+command_install = "paru %VALUE%"
+command_remove = "sudo paru -R %VALUE%"
