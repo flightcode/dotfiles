@@ -9,17 +9,17 @@ Finally I return to Arch after 3 years of burnout. New repo since it's easier th
 ## Programs
 - Wayland (Display Server)
 - Hyprland (Compositor & Window Manager)
-- ly (Display Manager & Login Greeter)
+- greetd-tuigreet (Login Greeter)
 - swww (Wallpaper Manager)
 - hellwal (Colour Manager)
 - kitty (Terminal Emulator)
 - zsh (Shell)
 - Starship (Shell Prompt)
 - lf (File Manager)
-- rofi (Menu)
+- walker (Menu)
 - eww (Widgets & Bar)
-- neofetch (Fetch)
-- btop (System Monitor)
+- fastfetch (Fetch)
+- btm (System Monitor)
 - librewolf (Web Browser)
 - pywalfox (Browser Theming)
 - lolcat (Rainbows, yes)
@@ -31,13 +31,10 @@ Finally I return to Arch after 3 years of burnout. New repo since it's easier th
 - [ ] Config starship?
 - [ ] Config lf and learn binds
 - [ ] Install neovim and plugins
-- [ ] Config rofi and fix font blurriness
-- [ ] Config eww top bar
 - [ ] Config eww sidebar/menu
 - [ ] Config eww hotkey guide
-- [ ] Config neofetch better
 - [ ] Add librewolf config / extension list
-- [ ] Add bitwarden & tailscale cli w/ eww integration
+- [ ] Add bitwarden & tailscale cli w/ eww/walker integration
 - [ ] Install obsidian
 - [ ] Install screensaver tool (flameshot?)
 - [ ] Install steam (TUI?)
